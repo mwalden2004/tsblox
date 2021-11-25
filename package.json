@@ -1,6 +1,6 @@
 {
   "name": "tsblox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TSBlox is an upcoming object-oriented Roblox library to assist in making Roblox API requests with no struggle\"",
   "main": "index.ts",
   "scripts": {
