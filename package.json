@@ -1,5 +1,5 @@
 {
-  "name": "tsblox",
+  "name": "ts-blox",
   "version": "1.0.1",
   "description": "TSBlox is an upcoming object-oriented Roblox library to assist in making Roblox API requests with no struggle\"",
   "main": "index.ts",
@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "node-fetch": "^3.1.0"
+    "node-fetch": "^2.6.6",
+    "tor-request": "^3.1.0"
   },
   "author": "Matthew W (matthew@mwalden.tech)",
   "license": "ISC",

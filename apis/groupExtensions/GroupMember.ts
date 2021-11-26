@@ -35,7 +35,7 @@ export default class GroupMember {
         if (!this.opts || !this.opts.cookie){
             throw new Error("Must be authenticated to attempt to remove a users posts.")
         }
-        const req = await Request(ApiType.Groups, `/v1/groups/${this.group.id}/walls/users/${this.user.id}/posts`, RequestType.DELETE, {autoCSRF: true, cookie: this.opts.cookie});
+        const req = await Request(ApiType.Groups, `/v1/groups/${this.group.id}/walls/users/${this.user.id}/posts`, RequestType.DELETE, {autoCSRF: true, cookie: this.opts.cookie}, this.opts);
     }
 
     public async rank(roleId: number): Promise<void> {
@@ -49,14 +49,14 @@ export default class GroupMember {
         body: JSON.stringify({
             roleId
         })
-    });
+    }, this.opts);
     }
 
     public async exile(): Promise<void> {
         if (!this.opts || !this.opts.cookie){
             throw new Error("Must be authenticated to attempt to exile a user.")
         }
-        const req = await Request(ApiType.Groups, `/v1/groups/${this.group.id}/users/${this.user.id}`, RequestType.DELETE, {autoCSRF: true, cookie: this.opts.cookie});
+        const req = await Request(ApiType.Groups, `/v1/groups/${this.group.id}/users/${this.user.id}`, RequestType.DELETE, {autoCSRF: true, cookie: this.opts.cookie}, this.opts);
     }
     
 

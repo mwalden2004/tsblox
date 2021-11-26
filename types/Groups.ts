@@ -53,6 +53,19 @@ export interface Shout {
   updated: string | Date;
 }
 
+export interface WallPost_Type {
+  id: number;
+  poster: Poster | User;
+  body: string;
+  created: string;
+  updated: string;
+}
+export interface Poster {
+  buildersClubMembershipType: string;
+  userId: number;
+  username: string;
+  displayName: string;
+}
 
 
 export interface GroupsType {

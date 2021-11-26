@@ -18,7 +18,7 @@ export default class Members {
             const members = [] as GroupMember[];
 
             const get = async (nextCursor?: string) => {
-                const req = await Request(ApiType.Groups, `/v1/groups/${this.group.id}/users?limit=100${nextCursor == undefined ? "" : `&cursor=${nextCursor}`}`, RequestType.GET, {});
+                const req = await Request(ApiType.Groups, `/v1/groups/${this.group.id}/users?limit=100${nextCursor == undefined ? "" : `&cursor=${nextCursor}`}`, RequestType.GET, {}, this.opts);
                 const data = await req.json();
 
                 for (const user of data.data){
@@ -47,7 +47,7 @@ export default class Members {
             const members = [] as GroupMember[];
 
             const get = async (nextCursor?: string) => {
-                const req = await Request(ApiType.Groups, `/v1/groups/${this.group.id}/roles/${roleId}/users?limit=100${nextCursor == undefined ? "" : `&cursor=${nextCursor}`}`, RequestType.GET, {});
+                const req = await Request(ApiType.Groups, `/v1/groups/${this.group.id}/roles/${roleId}/users?limit=100${nextCursor == undefined ? "" : `&cursor=${nextCursor}`}`, RequestType.GET, {}, this.opts);
                 const data = await req.json();
 
                 for (const user of data.data){

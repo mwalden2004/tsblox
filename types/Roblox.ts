@@ -3,8 +3,11 @@ import {GroupsType} from "./Groups"
 
 export interface RobloxOptions {
     cookie?: string;
-    torEnabled?: boolean;
+    torIp?: string;
+    torPort?: number;
+    torPassword?: string;
     captchaToken?: string;
+    
 }
 
 export interface Roblox {

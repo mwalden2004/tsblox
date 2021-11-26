@@ -24,7 +24,7 @@ export default function Users(opts?: RobloxOptions): UsersType {
                 ],
                 "excludeBannedUsers": false
             })
-        });
+        }, opts);
         const data = (await req.json())//
         if (data.data.length == 0){
             throw new Error("User not found.")

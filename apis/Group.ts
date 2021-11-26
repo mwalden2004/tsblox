@@ -4,6 +4,9 @@ import Request from "../libs/Request";
 import { ApiType, RequestType } from "../types/Request";
 import User from "./User";
 import Members from "./groupExtensions/members";
+import JoinRequests from "./groupExtensions/JoinRequests";
+import Roles from "./groupExtensions/Roles";
+import WallPosts from "./groupExtensions/WallPosts";
 
 export default class Group {
     public id: number;
@@ -18,7 +21,12 @@ export default class Group {
     private isBot: boolean;
     private opts?: any;
     private botAuthenticated: boolean;
-    members: Members;
+
+    //Sub-Classes
+    public members: Members;
+    public JoinRequests: JoinRequests;
+    public Roles: Roles;
+    public WallPosts: WallPosts;
 
     constructor(groupId: number, opts?: RobloxOptions){
         this.id = groupId;
@@ -39,7 +47,10 @@ export default class Group {
             updated: new Date(),
         }
 
-        this.members = new Members(this, opts)
+        this.members = new Members(this, opts);
+        this.JoinRequests = new JoinRequests(this, opts);
+        this.Roles = new Roles(this, opts);
+        this.WallPosts = new WallPosts(this, opts);
 
 
 
@@ -50,8 +61,8 @@ export default class Group {
     }
 
     public async updateInfo(): Promise<GroupResponse> {
-        const req = await Request(ApiType.Groups, `/v1/groups/${this.id}`, RequestType.GET, {});
-        const reqv2 = await Request(ApiType.Groups, `/v2/groups?groupIds=${this.id}`, RequestType.GET, {});
+        const req = await Request(ApiType.Groups, `/v1/groups/${this.id}`, RequestType.GET, {}, this.opts);
+        const reqv2 = await Request(ApiType.Groups, `/v2/groups?groupIds=${this.id}`, RequestType.GET, {}, this.opts);
         const data = await req.json();
         const datav2 = await reqv2.json();
         
@@ -79,7 +90,7 @@ export default class Group {
     }
 
     public async getNameHistory(): Promise<string[]> {
-        const req = await Request(ApiType.Groups, `/v1/groups/${this.id}/name-history?limit=100`, RequestType.GET, {});
+        const req = await Request(ApiType.Groups, `/v1/groups/${this.id}/name-history?limit=100`, RequestType.GET, {}, this.opts);
         const data = await req.json();
         const resp = data.data as [{name: string; created: string}]
         return resp.map(name => name.name);
